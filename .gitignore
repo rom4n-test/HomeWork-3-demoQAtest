@@ -2,7 +2,6 @@ HELP.md
 build/
 !**/src/main/**
 !**/src/test/**
-*.log
 
 ### IntelliJ IDEA ###
 .idea
@@ -10,6 +9,8 @@ build/
 *.iml
 *.ipr
 
-
 ### Gradle ###
 .gradle
+
+### Logs ###
+*.log
