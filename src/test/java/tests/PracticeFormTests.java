@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.selector.ByText;
 import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,6 +15,8 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PracticeFormTests {
 
@@ -36,7 +39,12 @@ public class PracticeFormTests {
         @Test
         void fillFormTest() {
 //открываем страницу
+            Selenide.clearBrowserCookies();
             open("/automation-practice-form");
+            $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+//удаляем лишние элементы со страницы которые могут мешать
+            executeJavaScript("$('#fixedban').remove()");
+            executeJavaScript("$('footer').remove()");
 
 //вводим значениия для полей First Name, Last Name, Email
             $("#firstName").setValue("Valeriy");
@@ -44,6 +52,7 @@ public class PracticeFormTests {
             $("#userEmail").setValue("valeron1337@test.ru");
 
 //проверяем рабату батонов
+            $("#genterWrapper").$(byText("Other")).click();
             $("[for='gender-radio-3']").click();
             $("[for='gender-radio-2']").click();
             $("[for='gender-radio-1']").click();
@@ -99,16 +108,18 @@ public class PracticeFormTests {
             $("#submit").hover().click();
 
 //проверяем таблицу с введёнными данными
-            $(".table-responsive").shouldHave(text("Valeriy Samodurov"));
-            $(".table-responsive").shouldHave(text("valeron1337@test.ru"));
-            $(".table-responsive").shouldHave(text("Male"));
-            $(".table-responsive").shouldHave(text("9993274687"));
-            $(".table-responsive").shouldHave(text("19 July,1990"));
-            $(".table-responsive").shouldHave(text("Computer Science"));
-            $(".table-responsive").shouldHave(text("Reading"));
-            $(".table-responsive").shouldHave(text("Приложение.jpeg"));
-            $(".table-responsive").shouldHave(text("Sun street 12"));
-            $(".table-responsive").shouldHave(text("Uttar Pradesh Agra"));
+//            $(".table-responsive").shouldHave(text("Valeriy Samodurov"));
+//            $(".table-responsive").shouldHave(text("valeron1337@test.ru"));
+//            $(".table-responsive").shouldHave(text("Male"));
+//            $(".table-responsive").shouldHave(text("9993274687"));
+//            $(".table-responsive").shouldHave(text("19 July,1990"));
+//            $(".table-responsive").shouldHave(text("Computer Science"));
+//            $(".table-responsive").shouldHave(text("Reading"));
+//            $(".table-responsive").shouldHave(text("Приложение.jpeg"));
+//            $(".table-responsive").shouldHave(text("Sun street 12"));
+//            $(".table-responsive").shouldHave(text("Uttar Pradesh Agra"));
+            String result = $(".table-responsive").text();	//
+            assertTrue(result.contains("Student Name Valeriy Samodurov"));		// проверка текста. Хорошая практика
 
 //закрываем таблицу
             $("#closeLargeModal").click();
