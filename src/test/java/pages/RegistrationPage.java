@@ -9,9 +9,6 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static components.RegPageLocators.TABLE_WITH_THANKS;
-import static java.awt.SystemColor.text;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // объявление переменных с локаторами
@@ -154,12 +151,12 @@ public class RegistrationPage{
     }
     // метод для проверки отсутствия таблицы
     public RegistrationPage checkTableNotExist() {
-        TABLE_WITH_THANKS.shouldNot(exist);
+        (RegPageLocators.TABLE_WITH_THANKS).shouldNot(exist);
         return this;
     }
     // метод для проверки открытия таблицы с благодарностью за регистрацию
     public RegistrationPage checkTableWithThanks() {
-        TABLE_WITH_THANKS.shouldBe(visible).shouldHave(text("Thanks for submitting the form"));
+        (RegPageLocators.TABLE_WITH_THANKS).shouldBe(visible).shouldHave(text("Thanks for submitting the form"));
         return this;
     }
 }

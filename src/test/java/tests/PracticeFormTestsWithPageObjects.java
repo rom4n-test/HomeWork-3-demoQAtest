@@ -7,6 +7,7 @@ public class PracticeFormTestsWithPageObjects extends TestBase { //при экс
 
     RegistrationPage registrationPage = new RegistrationPage();
 
+
     @Test
         //Проверка регистрации студента с полным набором данных
     void fillFormTestFull() {
@@ -58,8 +59,9 @@ public class PracticeFormTestsWithPageObjects extends TestBase { //при экс
                 .clickCloseTable();
     }
 
-    @Test
-        // Проверка регистрации студента с полным набором данных
+
+    @Test  // Проверка регистрации студента с полным набором данных
+
     void fillFormTestMinimal() {
 //открываем страницу
         registrationPage.openPage()
@@ -82,8 +84,9 @@ public class PracticeFormTestsWithPageObjects extends TestBase { //при экс
                 .clickCloseTable();
     }
 
-    @Test
-// Негативная проверка
+
+    @Test // Негативная проверка
+
     void fillFormTestNotInfo() {
 //открываем страницу
         registrationPage.openPage()
